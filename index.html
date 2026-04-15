@@ -2359,7 +2359,7 @@
           </a>
         </div>
 
-        <form class="lead-form" id="formulario-startia" action="#" method="post" novalidate>
+        <form class="lead-form" id="formulario-startia" name="contacto" action="/" method="post" data-netlify="true" novalidate>
           <div class="form-header">
             <h3 class="form-title">Contanos por dónde querés empezar.</h3>
             <p class="form-sub">Dejanos tus datos y te ayudamos a elegir la primera pieza para tu negocio.</p>
@@ -2604,14 +2604,35 @@
             return;
           }
 
-          if (status) {
-            status.classList.add('success');
-            status.textContent = 'Consulta lista. Te responderemos con la primera pieza recomendada.';
-          }
+          var submitBtn = leadForm.querySelector('.form-submit');
+          var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+          if (submitBtn) submitBtn.innerHTML = 'Enviando...';
 
-          leadForm.reset();
-          fields.forEach(function (field) {
-            setFieldState(field, true);
+          var formData = new FormData(leadForm);
+
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+          })
+          .then(function() {
+            if (status) {
+              status.classList.add('success');
+              status.textContent = 'Consulta lista. Te responderemos con la primera pieza recomendada.';
+            }
+            leadForm.reset();
+            fields.forEach(function (field) {
+              setFieldState(field, true);
+            });
+          })
+          .catch(function(error) {
+            if (status) {
+              status.classList.remove('success');
+              status.textContent = 'Hubo un error al enviar. Por favor, intentá de nuevo.';
+            }
+          })
+          .finally(function() {
+            if (submitBtn) submitBtn.innerHTML = originalBtnText;
           });
         });
       }
