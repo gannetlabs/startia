@@ -22,7 +22,8 @@
       --ease-out:    cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    /* scroll-behavior manejado por Lenis */
+    html { scroll-behavior: auto; }
     body {
       font-family: 'Outfit', sans-serif;
       background: var(--cream);
@@ -42,6 +43,39 @@
         radial-gradient(ellipse 70% 50% at 15% 60%, rgba(217,119,6,0.06) 0%, transparent 70%),
         radial-gradient(ellipse 50% 40% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
         radial-gradient(ellipse 40% 60% at 60% 80%, rgba(217,119,6,0.04) 0%, transparent 65%);
+    }
+
+    /* ─── PARALLAX ORBS ─── */
+    .parallax-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(72px);
+      opacity: 0;
+      will-change: transform;
+      transition: opacity 1.2s ease;
+      z-index: 0;
+    }
+    .parallax-orb.loaded { opacity: 1; }
+    .orb-1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%);
+      top: 5%; left: -8%;
+    }
+    .orb-2 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%);
+      top: 30%; right: -6%;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(217,119,6,0.05) 0%, transparent 70%);
+      top: 65%; left: 40%;
+    }
+
+    /* ─── PARALLAX LAYER ─── */
+    [data-parallax] {
+      will-change: transform;
     }
 
     /* ─── SCROLL REVEAL ─── */
@@ -907,6 +941,11 @@
 </head>
 <body>
 
+  <!-- ─── PARALLAX ORBS (background depth layers) ─── -->
+  <div class="parallax-orb orb-1" aria-hidden="true"></div>
+  <div class="parallax-orb orb-2" aria-hidden="true"></div>
+  <div class="parallax-orb orb-3" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════
        NAVIGATION
   ════════════════════════════════════════════ -->
@@ -974,8 +1013,8 @@
           </div>
         </div>
 
-        <!-- RIGHT: Floating puzzle visual -->
-        <div class="hero-visual reveal delay-2">
+        <!-- RIGHT: Floating puzzle visual (parallax container) -->
+        <div class="hero-visual reveal delay-2" data-parallax data-parallax-speed="0.12">
           <div class="puzzle-grid" role="img" aria-label="Módulos de Startia conectados entre sí">
 
             <!-- SVG connecting lines (behind pieces) -->
@@ -987,7 +1026,7 @@
             </svg>
 
             <!-- Piece 1: Landing Page -->
-            <div class="puzzle-piece piece-1">
+            <div class="puzzle-piece piece-1" data-parallax data-parallax-speed="0.18">
               <div class="piece-icon" style="background: #FEF3DC;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="3" width="18" height="18" rx="3"/>
@@ -1000,7 +1039,7 @@
             </div>
 
             <!-- Piece 2: Contenido -->
-            <div class="puzzle-piece piece-2">
+            <div class="puzzle-piece piece-2" data-parallax data-parallax-speed="0.10">
               <div class="piece-icon" style="background: #F0FDF4;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
@@ -1012,7 +1051,7 @@
             </div>
 
             <!-- Piece 3: Turnos -->
-            <div class="puzzle-piece piece-3">
+            <div class="puzzle-piece piece-3" data-parallax data-parallax-speed="0.22">
               <div class="piece-icon" style="background: #EFF6FF;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -1026,7 +1065,7 @@
             </div>
 
             <!-- Piece 4: Dashboard -->
-            <div class="puzzle-piece piece-4">
+            <div class="puzzle-piece piece-4" data-parallax data-parallax-speed="0.14">
               <div class="piece-icon" style="background: #FDF4FF;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="3" width="7" height="7" rx="1"/>
@@ -1462,25 +1501,103 @@
 
 
   <!-- ═══════════════════════════════════════════
-       SCROLL REVEAL SCRIPT
+       LENIS SMOOTH SCROLL + PARALLAX
   ════════════════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script>
     (function () {
-      var observer = new IntersectionObserver(
+      /* ── 1. SCROLL REVEAL (Intersection Observer) ── */
+      var revealObserver = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
+              revealObserver.unobserve(entry.target);
             }
           });
         },
         { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
       );
-
       document.querySelectorAll('.reveal').forEach(function (el) {
-        observer.observe(el);
+        revealObserver.observe(el);
       });
+
+      /* ── 2. LENIS INIT ── */
+      var lenis = new Lenis({
+        lerp: 0.075,
+        smoothWheel: true,
+        syncTouch: false,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+      });
+
+      /* Wiring Lenis into rAF */
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      /* Hash-link smooth navigation via Lenis */
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var targetId = anchor.getAttribute('href').slice(1);
+          if (!targetId) return;
+          var target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+          }
+        });
+      });
+
+      /* ── 3. PARALLAX ENGINE ── */
+      var parallaxEls = [];
+      document.querySelectorAll('[data-parallax]').forEach(function (el) {
+        parallaxEls.push({
+          el: el,
+          speed: parseFloat(el.getAttribute('data-parallax-speed') || '0.1'),
+          currentY: 0
+        });
+      });
+
+      /* Orbs: fixed-position, driven by raw scroll offset */
+      var orb1 = document.querySelector('.orb-1');
+      var orb2 = document.querySelector('.orb-2');
+      var orb3 = document.querySelector('.orb-3');
+
+      /* Smooth lerp helper */
+      function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+      }
+
+      var scrollY = 0;
+
+      lenis.on('scroll', function (e) {
+        scrollY = e.scroll;
+
+        /* Orbs: parallax at different depths */
+        if (orb1) orb1.style.transform = 'translate3d(0,' + (scrollY * -0.25) + 'px,0)';
+        if (orb2) orb2.style.transform = 'translate3d(0,' + (scrollY * -0.18) + 'px,0)';
+        if (orb3) orb3.style.transform = 'translate3d(0,' + (scrollY * -0.10) + 'px,0)';
+
+        /* data-parallax elements: translate relative to viewport center */
+        parallaxEls.forEach(function (item) {
+          var rect = item.el.getBoundingClientRect();
+          var elCenter = rect.top + rect.height / 2;
+          var viewportCenter = window.innerHeight / 2;
+          var offset = (elCenter - viewportCenter) * item.speed;
+          item.el.style.transform = 'translate3d(0,' + offset + 'px,0)';
+        });
+      });
+
+      /* Reveal orbs after a short delay so they fade in gracefully */
+      setTimeout(function () {
+        document.querySelectorAll('.parallax-orb').forEach(function (orb) {
+          orb.classList.add('loaded');
+        });
+      }, 200);
+
     })();
   </script>
 
