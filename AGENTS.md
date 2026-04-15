@@ -28,6 +28,7 @@ If browser opening is unavailable, serve the current directory with any static f
 - Hero with split content and a right-side visual based on the "El Rompecabezas" concept.
 - Floating module pieces in the hero should keep a puzzle-piece silhouette with tabs and sockets, implemented in CSS rather than bitmap assets.
 - Main sections: `#como-funciona`, `#modulos`, `#testimonios`, `#empezar`, final CTA, and footer.
+- `#como-funciona` uses puzzle-shaped step cards. The third step is animated with GSAP ScrollTrigger on desktop so it starts separated above the step row and docks into the second piece while scrolling.
 - `#empezar` contains the lead form. Primary CTAs should point to `#formulario-startia` when the user intent is to start or request guidance.
 - The lead form is static: it validates required fields and email in vanilla JavaScript, then shows an inline success message. It does not submit to a backend yet.
 
@@ -57,6 +58,7 @@ Use the installed `.agents/skills/` instructions when the task matches their sco
 - Keep the hero split and asymmetric: text left, visual right.
 - Use `IntersectionObserver` for scroll reveals.
 - Avoid `window.addEventListener('scroll')` for reveal effects.
+- Use GSAP ScrollTrigger for complex scroll-linked assembly effects; keep those effects disabled or static for reduced-motion users and small screens.
 - Use `cubic-bezier(0.32, 0.72, 0, 1)` for transitions.
 - Use `picsum.photos/seed/{descriptive-seed}/width/height` for placeholder images.
 
