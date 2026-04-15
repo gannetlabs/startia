@@ -439,6 +439,42 @@
       animation: float-a 4.7s ease-in-out infinite 1.8s;
     }
 
+    .piece-5 {
+      position: absolute;
+      left: 12px;
+      bottom: clamp(-172px, -10vw, -140px);
+      width: clamp(132px, 11vw, 150px);
+      min-height: 128px;
+      padding: 22px 18px 18px;
+      border-radius: 22px;
+      z-index: 2;
+      animation: float-b 4.9s ease-in-out infinite 1.35s;
+    }
+
+    .piece-6 {
+      position: absolute;
+      top: clamp(18px, 3vw, 38px);
+      right: clamp(-148px, -10vw, -116px);
+      width: clamp(132px, 11vw, 150px);
+      min-height: 128px;
+      padding: 22px 18px 18px;
+      border-radius: 22px;
+      z-index: 2;
+      animation: float-c 4.4s ease-in-out infinite 0.35s;
+    }
+
+    .piece-7 {
+      position: absolute;
+      top: clamp(-154px, -9vw, -126px);
+      left: 12px;
+      width: clamp(132px, 11vw, 150px);
+      min-height: 128px;
+      padding: 22px 18px 18px;
+      border-radius: 22px;
+      z-index: 2;
+      animation: float-a 4.6s ease-in-out infinite 0.9s;
+    }
+
     @keyframes float-a {
 
       0%,
@@ -510,6 +546,27 @@
       z-index: 2;
     }
 
+    .piece-extra .piece-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      margin-bottom: 12px;
+    }
+
+    .piece-extra .piece-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .piece-extra .piece-label {
+      font-size: 13px;
+    }
+
+    .piece-extra .piece-sub {
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
     .piece-connector {
       display: block;
     }
@@ -517,7 +574,10 @@
     .piece-1::before,
     .piece-1 .piece-connector,
     .piece-2 .piece-connector,
-    .piece-3 .piece-connector {
+    .piece-3 .piece-connector,
+    .piece-5 .piece-connector,
+    .piece-6 .piece-connector,
+    .piece-7 .piece-connector {
       background: var(--card) !important;
       border: 1px solid var(--border);
       box-shadow: 0 8px 24px -14px rgba(24, 22, 15, 0.22), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
@@ -527,7 +587,10 @@
     .piece-2::after,
     .piece-3::after,
     .piece-4::before,
-    .piece-4 .piece-connector {
+    .piece-4 .piece-connector,
+    .piece-5::before,
+    .piece-6::before,
+    .piece-7::before {
       background: var(--cream) !important;
       border: 1px solid rgba(24, 22, 15, 0.07);
       box-shadow: inset 0 8px 18px rgba(24, 22, 15, 0.05);
@@ -582,6 +645,55 @@
       transform: translateX(-50%);
     }
 
+    .piece-extra::before,
+    .piece-extra::after,
+    .piece-extra .piece-connector {
+      width: 38px;
+      height: 38px;
+    }
+
+    .piece-5::before {
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .piece-5 .piece-connector {
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+    }
+
+    .piece-6::before {
+      top: 50%;
+      left: -20px;
+      transform: translateY(-50%);
+    }
+
+    .piece-6 .piece-connector {
+      left: 50%;
+      bottom: -20px;
+      transform: translateX(-50%);
+    }
+
+    .piece-7::before {
+      left: 50%;
+      bottom: -20px;
+      transform: translateX(-50%);
+    }
+
+    .piece-7 .piece-connector {
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 1080px) {
+      .piece-extra {
+        display: none;
+      }
+    }
+
     @media (max-width: 420px) {
       .puzzle-grid {
         gap: 12px;
@@ -628,6 +740,7 @@
       transform: translate(-50%, -50%);
       width: 100%;
       height: 100%;
+      overflow: visible;
       pointer-events: none;
       z-index: 0;
     }
@@ -639,6 +752,16 @@
       fill: none;
       opacity: 0.4;
       animation: dash-move 3s linear infinite;
+    }
+
+    .conn-line-extra {
+      opacity: 0.32;
+    }
+
+    @media (max-width: 1080px) {
+      .conn-line-extra {
+        display: none;
+      }
     }
 
     @keyframes dash-move {
@@ -1722,7 +1845,27 @@
               <line x1="50" y1="30" x2="50" y2="70" class="conn-line" />
               <!-- vertical center line -->
               <line x1="28" y1="50" x2="72" y2="50" class="conn-line" />
+              <path d="M28 25 C27 13 23 2 22 -12" class="conn-line conn-line-extra" />
+              <line x1="28" y1="74" x2="28" y2="116" class="conn-line conn-line-extra" />
+              <line x1="72" y1="30" x2="116" y2="30" class="conn-line conn-line-extra" />
             </svg>
+
+            <!-- Piece 7: Agente IA -->
+            <div class="puzzle-piece piece-extra piece-7">
+              <div class="piece-icon" style="background: #FEF3DC;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="5" y="7" width="14" height="12" rx="3" />
+                  <path d="M9 7V5M15 7V5" />
+                  <path d="M9.5 13h.01M14.5 13h.01" />
+                  <path d="M10 16h4" />
+                  <path d="M4 12H2M22 12h-2" />
+                </svg>
+              </div>
+              <div class="piece-label">Agente IA</div>
+              <div class="piece-sub">Vive en tu landing y responde consultas</div>
+              <div class="piece-connector" aria-hidden="true"></div>
+            </div>
 
             <!-- Piece 1: Landing Page -->
             <div class="puzzle-piece piece-1">
@@ -1763,6 +1906,41 @@
               </div>
               <div class="piece-label">Turnos</div>
               <div class="piece-sub">Agenda automática que trabaja por vos</div>
+              <div class="piece-connector" aria-hidden="true"></div>
+            </div>
+
+            <!-- Piece 5: Recordatorios -->
+            <div class="puzzle-piece piece-extra piece-5">
+              <div class="piece-icon" style="background: #EFF6FF;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
+                  <path d="M13.73 19a2 2 0 01-3.46 0" />
+                </svg>
+              </div>
+              <div class="piece-label">Recordatorios</div>
+              <div class="piece-sub">Avisos simples para no perder consultas</div>
+              <div class="piece-connector" aria-hidden="true"></div>
+            </div>
+
+            <!-- Piece 6: Ideas -->
+            <div class="puzzle-piece piece-extra piece-6">
+              <div class="piece-icon" style="background: #F0FDF4;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 3v3" />
+                  <path d="M12 18v3" />
+                  <path d="M4.22 4.22l2.12 2.12" />
+                  <path d="M17.66 17.66l2.12 2.12" />
+                  <path d="M3 12h3" />
+                  <path d="M18 12h3" />
+                  <path d="M4.22 19.78l2.12-2.12" />
+                  <path d="M17.66 6.34l2.12-2.12" />
+                  <circle cx="12" cy="12" r="3.5" />
+                </svg>
+              </div>
+              <div class="piece-label">Ideas</div>
+              <div class="piece-sub">Temas listos cuando no sabés qué publicar</div>
               <div class="piece-connector" aria-hidden="true"></div>
             </div>
 

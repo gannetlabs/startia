@@ -27,6 +27,8 @@ If browser opening is unavailable, serve the current directory with any static f
 
 - Hero with split content and a right-side visual based on the "El Rompecabezas" concept.
 - Floating module pieces in the hero should keep a puzzle-piece silhouette with tabs and sockets, implemented in CSS rather than bitmap assets.
+- The hero visual includes compact satellite pieces connected by animated dotted SVG lines: `Agente IA` above `Landing Page`, `Ideas` to the right of `Contenido`, and `Recordatorios` below `Turnos`.
+- In the hero visual, `Agente IA`, `Landing Page`, `Turnos`, and `Recordatorios` should stay left-aligned on the same vertical axis.
 - Main sections: `#como-funciona`, `#modulos`, `#testimonios`, `#empezar`, final CTA, and footer.
 - `#como-funciona` uses puzzle-shaped step cards. The third step is animated with GSAP ScrollTrigger on desktop so it starts separated above the step row and docks into the second piece while scrolling.
 - `#empezar` contains the lead form. Primary CTAs should point to `#formulario-startia` when the user intent is to start or request guidance.
@@ -67,8 +69,11 @@ Use the installed `.agents/skills/` instructions when the task matches their sco
 Concept: "El Rompecabezas". Startia sells independent modules that fit together:
 
 - Landing Page
+  - Agente IA
 - Content Generator
+  - Ideas
 - Appointments Agent
+  - Recordatorios
 - Dashboard
 
 The copy should stay friendly, human, and approachable. Avoid technical language.

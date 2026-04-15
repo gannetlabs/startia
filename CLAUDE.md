@@ -38,6 +38,8 @@ These rules apply whenever generating or modifying UI in this project:
 - **Icons:** Inline SVG with `stroke-width="1.5"`. No Lucide, FontAwesome, or emoji.
 - **Full-height sections:** Always `min-h-[100dvh]`, never `h-screen` (iOS Safari bug).
 - **Hero layout:** Split asymmetric (text left, visual right). Centered hero is banned.
+- **Hero puzzle visual:** Preserve the CSS puzzle-piece silhouettes and animated dotted SVG connector lines. The compact satellite pieces are `Agente IA` above `Landing Page`, `Ideas` to the right of `Contenido`, and `Recordatorios` below `Turnos`.
+- **Hero alignment:** Keep `Agente IA`, `Landing Page`, `Turnos`, and `Recordatorios` left-aligned on the same vertical axis.
 - **Cards:** Use elevation only when hierarchy requires it. Avoid 3-column equal card grids.
 - **Animations:** `cubic-bezier(0.32, 0.72, 0, 1)` for all transitions. Never `linear` or `ease-in-out`.
 - **Scroll reveals:** Use `IntersectionObserver`. Never `window.addEventListener('scroll')`.
@@ -45,12 +47,15 @@ These rules apply whenever generating or modifying UI in this project:
 
 ## Brand context
 
-**Concept:** "El Rompecabezas" — four independent modules (Landing Page, Content Generator, Appointments Agent, Dashboard) that snap together. Clients buy only what they need; new pieces auto-integrate with existing ones.
+**Concept:** "El Rompecabezas" — four independent modules (Landing Page, Content Generator, Appointments Agent, Dashboard) that snap together. Clients buy only what they need; new pieces auto-integrate with existing ones. The hero can also show smaller connected pieces such as Agente IA, Ideas, and Recordatorios to suggest optional pieces that live inside or around the main modules.
 
 **Tone:** Zero technical language. Friendly, human, approachable — not "cyborg" or cold.
 
 **Module identity colors:**
 - Landing Page → amber `#D97706`
+- Agente IA → amber `#D97706`
 - Content Generator → green `#16a34a`
+- Ideas → green `#16a34a`
 - Appointments Agent → blue `#3b82f6`
+- Recordatorios → blue `#3b82f6`
 - Dashboard → purple `#9333ea`
