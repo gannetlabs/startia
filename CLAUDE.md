@@ -45,7 +45,10 @@ These rules apply whenever generating or modifying UI in this project:
 - **Animations:** `cubic-bezier(0.32, 0.72, 0, 1)` for all transitions. Never `linear` or `ease-in-out`.
 - **Scroll reveals:** Use `IntersectionObserver`. Never `window.addEventListener('scroll')`.
 - **Scroll-linked effects:** Use GSAP ScrollTrigger only for complex desktop effects, and keep them disabled/static for reduced-motion users and small screens.
-- **Pricing carousel:** Do not tie pricing cards to page scroll. The module-price cards should move only when the user scrolls inside the carousel viewport.
+- **Pricing carousel:** Do not tie pricing cards to page scroll. The module-price cards auto-scroll vertically on desktop and horizontally on mobile (≤860px). Carousel pauses on user interaction (hover/touch) and respects `prefers-reduced-motion`.
+- **Mobile menu:** Hamburger icon (3 horizontal lines, inline SVG) appears on screens ≤980px. Clicking opens a slide-in drawer from the right with all 6 nav links + CTA button. Closes on: link click, backdrop tap, Escape key, or close button. Uses `requestAnimationFrame` for smooth animation.
+- **Mobile layout:** Hero title above, puzzle visual below (no `order: -1`). Persona section collapses to single column at ≤900px (not 820px). Pricing and contact grids use `minmax(0, ...)` to avoid horizontal overflow.
+- **Touch gestures:** `touch-action: pan-y` on carousel viewport (desktop), `touch-action: pan-x` on mobile. No scroll event listeners; use `requestAnimationFrame` and viewport `scrollTop`/`scrollLeft` instead.
 - **Images:** `picsum.photos/seed/{descriptive-seed}/width/height` for placeholders. No Unsplash.
 
 ## Brand context
