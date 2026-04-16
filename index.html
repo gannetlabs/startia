@@ -131,12 +131,12 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
@@ -169,7 +169,7 @@
       transform: scale(0.97);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 980px) {
       .nav-links {
         display: none;
       }
@@ -2743,7 +2743,7 @@
 
     /* ─── BIG CTA ─── */
     .cta-section {
-      padding: 60px 0 120px;
+      padding: 64px 0 72px;
       position: relative;
       z-index: 1;
     }
@@ -2859,7 +2859,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 28px;
       flex-wrap: wrap;
     }
 
@@ -2873,8 +2873,9 @@
 
     .footer-links {
       display: flex;
-      gap: 24px;
+      gap: 18px;
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
@@ -2885,6 +2886,24 @@
     }
 
     .footer-links a:hover {
+      color: var(--black);
+    }
+
+    .footer-secondary {
+      display: flex;
+      gap: 18px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-secondary a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-secondary a:hover {
       color: var(--black);
     }
 
@@ -2904,11 +2923,14 @@
     <div class="nav-pill">
       <a href="#" class="nav-logo">Startia</a>
       <ul class="nav-links" role="list">
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#solucion">Solución</a></li>
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#modulos">Módulos</a></li>
         <li><a href="#testimonios">Historias</a></li>
+        <li><a href="#empezar">Precios</a></li>
       </ul>
-      <a href="#empezar" class="nav-cta">Empezar gratis</a>
+      <a href="#formulario-startia" class="nav-cta">Empezar gratis</a>
     </div>
   </nav>
 
@@ -3129,7 +3151,7 @@
   <!-- ═══════════════════════════════════════════
        OVERWHELM SECTION
   ════════════════════════════════════════════ -->
-  <section class="overwhelm-section" aria-labelledby="overwhelm-heading">
+  <section class="overwhelm-section" id="problema" aria-labelledby="overwhelm-heading">
     <div class="container">
       <div class="overwhelm-inner">
 
@@ -3195,7 +3217,7 @@
   <!-- ═══════════════════════════════════════════
        SOLUTION SECTION
   ════════════════════════════════════════════ -->
-  <section class="solution-section" aria-labelledby="solution-heading">
+  <section class="solution-section" id="solucion" aria-labelledby="solution-heading">
     <div class="container">
 
       <div class="solution-header">
@@ -3606,7 +3628,7 @@
   <!-- ═══════════════════════════════════════════
        PERSONA
   ════════════════════════════════════════════ -->
-  <section class="persona-section" aria-labelledby="persona-heading">
+  <section class="persona-section" id="para-vos" aria-labelledby="persona-heading">
     <div class="container">
       <div class="persona-grid">
 
@@ -3793,6 +3815,33 @@
 
 
   <!-- ═══════════════════════════════════════════
+       BIG CTA
+  ════════════════════════════════════════════ -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <span class="cta-tag">Prueba gratis</span>
+        <h2 class="cta-h2" id="cta-heading">
+          Elegí tu módulo y obtené<br><span class="accent">tu primer mes gratis.</span>
+        </h2>
+        <p class="cta-p">
+          Probá una primera pieza funcionando en tu negocio antes de sumar más módulos. Sin cursos, sin tarjeta y sin
+          compromiso.
+        </p>
+        <a href="#formulario-startia" class="btn-white">
+          Elegir mi primer módulo
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="#18160F" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+        <p class="cta-note">Primer mes gratis en el módulo inicial.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
        CONTACT FORM
   ════════════════════════════════════════════ -->
   <section class="contact-section" aria-labelledby="contact-heading">
@@ -3914,32 +3963,6 @@
 
 
   <!-- ═══════════════════════════════════════════
-       BIG CTA
-  ════════════════════════════════════════════ -->
-  <section class="cta-section" aria-labelledby="cta-heading">
-    <div class="container">
-      <div class="cta-inner reveal">
-        <span class="cta-tag">Tu próximo paso</span>
-        <h2 class="cta-h2" id="cta-heading">
-          La primera pieza<br>es <span class="accent">completamente gratis.</span>
-        </h2>
-        <p class="cta-p">
-          No hace falta saber de tecnología. No hace falta contratar a nadie. Solo necesitás empezar.
-        </p>
-        <a href="#formulario-startia" class="btn-white">
-          Armar mi kit ahora
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="#18160F" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </a>
-        <p class="cta-note">Sin tarjeta de crédito. Sin letra chica.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════════ -->
   <footer>
@@ -3947,6 +3970,15 @@
       <div class="footer-inner">
         <a href="#" class="footer-logo">Startia</a>
         <ul class="footer-links" role="list">
+          <li><a href="#problema">Problema</a></li>
+          <li><a href="#solucion">Solución</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#modulos">Módulos</a></li>
+          <li><a href="#testimonios">Historias</a></li>
+          <li><a href="#empezar">Precios</a></li>
+          <li><a href="#formulario-startia">Contacto</a></li>
+        </ul>
+        <ul class="footer-secondary" role="list">
           <li><a href="#">Privacidad</a></li>
           <li><a href="#">Términos</a></li>
           <li><a href="#">Soporte</a></li>
