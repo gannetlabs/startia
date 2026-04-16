@@ -1871,19 +1871,108 @@
     /* ─── MODULES BENTO ─── */
     .bento {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: 320px clamp(88px, 9vw, 132px) 320px;
+      column-gap: clamp(28px, 4vw, 48px);
+      row-gap: clamp(24px, 3vw, 34px);
       margin-top: 72px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .bento-map-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .bento-map-line {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 2 11;
+      vector-effect: non-scaling-stroke;
+      animation: bento-flow 2.8s linear infinite;
+    }
+
+    .bento-map-line-core {
+      stroke: rgba(217, 119, 6, 0.44);
+    }
+
+    .bento-map-line-module {
+      stroke: rgba(24, 22, 15, 0.2);
+      stroke-dasharray: 2 12;
+      animation-duration: 3.4s;
+    }
+
+    .bento-map-line:nth-child(2) {
+      animation-delay: -0.7s;
+    }
+
+    .bento-map-line:nth-child(3) {
+      animation-delay: -1.4s;
+    }
+
+    .bento-map-line:nth-child(4) {
+      animation-delay: -2.1s;
+    }
+
+    .bento-map-line:nth-child(5) {
+      animation-delay: -2.8s;
+    }
+
+    @keyframes bento-flow {
+      to {
+        stroke-dashoffset: -52;
+      }
     }
 
     .bento-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 26px;
-      padding: 36px;
+      padding: 30px;
       position: relative;
-      overflow: hidden;
+      z-index: 1;
+      overflow: visible;
+      min-height: 320px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.3s;
+    }
+
+    .bento-card::before,
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .bento-card::before {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 26px -18px rgba(24, 22, 15, 0.24), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+      z-index: 0;
+    }
+
+    .bento-card::after {
+      background: var(--cream);
+      border: 1px solid rgba(24, 22, 15, 0.07);
+      box-shadow: inset 0 9px 20px rgba(24, 22, 15, 0.055);
+      z-index: 2;
+    }
+
+    .bento-card>* {
+      position: relative;
+      z-index: 3;
     }
 
     .bento-card:hover {
@@ -1894,42 +1983,120 @@
 
     .bc-sat-1 {
       grid-column: 1;
+      grid-row: 1;
+    }
+
+    .bc-sat-1::before {
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%);
+    }
+
+    .bc-sat-1::after {
+      left: 50%;
+      bottom: -25px;
+      transform: translateX(-50%);
     }
 
     .bc-central {
       grid-column: 2;
-      grid-row: 1 / 3;
-      background: var(--black);
-      color: var(--card);
-      border: 1px solid rgba(253, 251, 247, 0.15);
-      box-shadow: 0 32px 80px -20px rgba(24, 22, 15, 0.4);
-      display: flex;
-      flex-direction: column;
+      grid-row: 2;
+      background:
+        linear-gradient(145deg, rgba(254, 243, 220, 0.98), rgba(255, 250, 241, 0.98));
+      color: var(--black);
+      border-color: rgba(217, 119, 6, 0.32);
+      box-shadow: 0 28px 64px -24px rgba(217, 119, 6, 0.38), 0 1px 0 rgba(255, 255, 255, 0.86) inset;
+      align-self: center;
+      height: 356px;
+      padding: 28px;
+    }
+
+    .bc-central::before {
+      background:
+        linear-gradient(145deg, rgba(254, 243, 220, 0.98), rgba(255, 250, 241, 0.98));
+      border-color: rgba(217, 119, 6, 0.28);
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%);
+      box-shadow: 0 14px 28px -20px rgba(217, 119, 6, 0.42), 0 1px 0 rgba(255, 255, 255, 0.86) inset;
+    }
+
+    .bc-central::after {
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--cream);
+      border-color: rgba(217, 119, 6, 0.12);
     }
 
     .bc-central .bento-title {
-      color: #fff;
+      color: var(--black);
+      font-size: 22px;
+      margin-bottom: 6px;
     }
 
     .bc-central .bento-desc {
-      color: rgba(255, 255, 255, 0.7);
+      color: #6f4b20;
+      font-size: 13.5px;
+      line-height: 1.42;
+      max-width: none;
     }
 
     .bc-central .module-badge {
-      background: rgba(255, 255, 255, 0.1) !important;
-      color: #fff !important;
+      background: rgba(217, 119, 6, 0.14) !important;
+      color: #92400e !important;
+      margin-bottom: 12px;
+    }
+
+    .bc-central .bento-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .bc-central .bento-icon svg {
+      width: 23px;
+      height: 23px;
     }
 
     .bc-sat-2 {
       grid-column: 3;
+      grid-row: 1;
+    }
+
+    .bc-sat-2::before {
+      left: 50%;
+      bottom: -25px;
+      transform: translateX(-50%);
+    }
+
+    .bc-sat-2::after {
+      top: 50%;
+      left: -25px;
+      transform: translateY(-50%);
     }
 
     .bc-sat-3 {
       grid-column: 1;
+      grid-row: 3;
+    }
+
+    .bc-sat-3::before {
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .bc-sat-3::after {
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%);
     }
 
     .bc-sat-ghost {
       grid-column: 3;
+      grid-row: 3;
       background: transparent;
       border: 1px dashed var(--border);
       box-shadow: none;
@@ -1939,6 +2106,24 @@
       align-items: center;
       text-align: center;
       opacity: 0.6;
+    }
+
+    .bc-sat-ghost::before {
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cream);
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    .bc-sat-ghost::after {
+      top: 50%;
+      left: -25px;
+      transform: translateY(-50%);
+      background: var(--cream);
+      border-style: dashed;
+      box-shadow: none;
     }
 
     .bc-sat-ghost:hover {
@@ -1956,22 +2141,85 @@
     @media (max-width: 1024px) {
       .bento {
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        gap: 18px;
+      }
+      .bento-map-lines {
+        display: none;
       }
       .bc-central {
         grid-column: 1 / 3;
         grid-row: auto;
+        height: auto;
+        min-height: 320px;
       }
       .bc-sat-1, .bc-sat-2, .bc-sat-3, .bc-sat-ghost {
         grid-column: span 1;
+        grid-row: auto;
+      }
+      .bento-card {
+        min-height: 270px;
+        height: auto;
+      }
+      .bento-card::before,
+      .bento-card::after {
+        width: 42px;
+        height: 42px;
+      }
+      .bc-sat-1::before,
+      .bc-sat-3::after,
+      .bc-central::before {
+        right: -22px;
+      }
+      .bc-sat-2::after,
+      .bc-sat-ghost::after,
+      .bc-central::after {
+        left: -22px;
+      }
+      .bc-sat-1::after,
+      .bc-sat-2::before {
+        bottom: -22px;
+      }
+      .bc-sat-3::before,
+      .bc-sat-ghost::before {
+        top: -22px;
       }
     }
 
     @media (max-width: 640px) {
       .bento {
         grid-template-columns: 1fr;
+        gap: 32px;
       }
       .bc-central, .bc-sat-1, .bc-sat-2, .bc-sat-3, .bc-sat-ghost {
         grid-column: 1;
+      }
+      .bento-card {
+        min-height: auto;
+        overflow: visible;
+      }
+      .bento-card::before,
+      .bento-card::after {
+        width: 36px;
+        height: 36px;
+      }
+      .bc-sat-1::before,
+      .bc-sat-3::after,
+      .bc-central::before {
+        right: -19px;
+      }
+      .bc-sat-2::after,
+      .bc-sat-ghost::after,
+      .bc-central::after {
+        left: -19px;
+      }
+      .bc-sat-1::after,
+      .bc-sat-2::before {
+        bottom: -19px;
+      }
+      .bc-sat-3::before,
+      .bc-sat-ghost::before {
+        top: -19px;
       }
     }
 
@@ -2035,107 +2283,151 @@
       border: 1px solid var(--border);
     }
 
-    /* Module mini preview UI */
-    .mini-ui {
-      background: #F6F4F0;
+    .core-dashboard {
+      margin-top: auto;
+      padding: 10px;
       border-radius: 14px;
-      padding: 16px;
-      margin-top: 24px;
+      background: rgba(255, 253, 248, 0.88);
+      border: 1px solid rgba(217, 119, 6, 0.18);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.92) inset;
     }
 
-    .mini-bar {
-      height: 8px;
-      border-radius: 100px;
-      background: var(--border);
+    .core-dashboard-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 8px;
+      color: #92400e;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    .mini-bar.amber {
-      background: rgba(217, 119, 6, 0.25);
-      width: 70%;
+    .core-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #166534;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
-    .mini-bar.short {
-      width: 45%;
-    }
-
-    .mini-bar.mid {
-      width: 80%;
-    }
-
-    .mini-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .mini-pill {
-      height: 28px;
-      border-radius: 8px;
-      background: var(--border);
-      flex: 1;
-    }
-
-    .mini-pill.amber {
-      background: rgba(217, 119, 6, 0.18);
-    }
-
-    .mini-card-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .mini-card {
-      height: 56px;
-      border-radius: 10px;
-      background: white;
-      border: 1px solid var(--border);
-    }
-
-    .mini-card.active {
-      background: var(--amber-soft);
-      border-color: rgba(217, 119, 6, 0.25);
-    }
-
-    .mini-table {
-      margin-top: 12px;
-    }
-
-    .mini-table-row {
-      display: flex;
-      gap: 8px;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mini-table-row:last-child {
-      border-bottom: none;
-    }
-
-    .mini-dot {
-      width: 8px;
-      height: 8px;
+    .core-live-dot,
+    .core-feed-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #22c55e;
       flex-shrink: 0;
-      margin-top: 2px;
     }
 
-    .mini-dot.amber {
-      background: var(--amber);
+    .core-live-dot {
+      background: #22c55e;
+      animation: core-pulse 1.8s var(--ease-out) infinite;
     }
 
-    .mini-line {
-      height: 8px;
-      border-radius: 4px;
-      background: var(--border);
+    .core-feed {
+      display: grid;
+      gap: 5px;
+    }
+
+    .core-feed-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 7px;
+      color: #6f4b20;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
+    .core-feed-dot.landing {
+      background: #D97706;
+    }
+
+    .core-feed-dot.social {
+      background: #16a34a;
+    }
+
+    .core-feed-dot.turnos {
+      background: #3b82f6;
+    }
+
+    .core-feed-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(217, 119, 6, 0.11);
+      overflow: hidden;
+    }
+
+    .core-feed-bar::before {
+      content: '';
+      display: block;
+      width: var(--flow);
+      height: 100%;
+      border-radius: inherit;
+      background: currentColor;
+      opacity: 0.55;
+      animation: core-flow 2.6s var(--ease-out) infinite alternate;
+    }
+
+    .core-feed-value {
+      color: #92400e;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .core-chart {
+      display: flex;
+      align-items: end;
+      gap: 6px;
+      height: 34px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(217, 119, 6, 0.12);
+    }
+
+    .core-chart-bar {
       flex: 1;
+      height: var(--bar);
+      min-height: 8px;
+      border-radius: 7px 7px 4px 4px;
+      background: linear-gradient(180deg, rgba(217, 119, 6, 0.58), rgba(217, 119, 6, 0.18));
+      transform-origin: bottom;
+      animation: core-rise 2.8s var(--ease-out) infinite alternate;
     }
 
-    .mini-line.short {
-      flex: 0.6;
+    .core-chart-bar:nth-child(2) {
+      animation-delay: -0.6s;
+    }
+
+    .core-chart-bar:nth-child(3) {
+      animation-delay: -1.2s;
+      background: linear-gradient(180deg, rgba(22, 163, 74, 0.5), rgba(22, 163, 74, 0.16));
+    }
+
+    .core-chart-bar:nth-child(4) {
+      animation-delay: -1.8s;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.48), rgba(59, 130, 246, 0.14));
+    }
+
+    @keyframes core-pulse {
+      50% {
+        transform: scale(1.45);
+        opacity: 0.42;
+      }
+    }
+
+    @keyframes core-flow {
+      to {
+        width: calc(var(--flow) + 10%);
+      }
+    }
+
+    @keyframes core-rise {
+      to {
+        transform: scaleY(0.82);
+      }
     }
 
     .connect-badge {
@@ -2149,7 +2441,7 @@
       font-size: 12px;
       font-weight: 600;
       color: #16a34a;
-      margin-top: 20px;
+      margin-top: auto;
     }
 
     .connect-dot {
@@ -2157,6 +2449,15 @@
       height: 6px;
       border-radius: 50%;
       background: #22c55e;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bento-map-line,
+      .core-live-dot,
+      .core-feed-bar::before,
+      .core-chart-bar {
+        animation: none;
+      }
     }
 
     /* ─── TESTIMONIALS ─── */
@@ -3409,10 +3710,17 @@
         Tu negocio crece.<br>Tu ecosistema también.
       </h2>
       <p class="section-sub reveal delay-2">
-        Cada módulo resuelve un problema en concreto. Juntos, alimentan a un Cerebro Central donde controlás todo sin fricciones. Agregá los que necesites, cuando los necesites.
+        Cada módulo resuelve un problema en concreto. Juntos, alimentan al núcleo Startia: cuantos más módulos sumás, más datos tiene tu negocio y mejores decisiones podés tomar.
       </p>
 
       <div class="bento">
+        <svg class="bento-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="bento-map-line bento-map-line-core" d="M 16.5 19.5 C 30 22, 38 38, 50 50" />
+          <path class="bento-map-line bento-map-line-core" d="M 83.5 19.5 C 70 22, 62 38, 50 50" />
+          <path class="bento-map-line bento-map-line-core" d="M 16.5 80.5 C 30 78, 38 62, 50 50" />
+          <path class="bento-map-line bento-map-line-module" d="M 16.5 19.5 C 9 38, 9 62, 16.5 80.5" />
+          <path class="bento-map-line bento-map-line-module" d="M 16.5 19.5 C 36 9, 64 9, 83.5 19.5" />
+        </svg>
 
         <!-- MODULE SAT 1: LANDING PAGE -->
         <div class="bento-card bc-sat-1 reveal">
@@ -3428,19 +3736,19 @@
           </div>
           <div class="bento-title">Landing Page</div>
           <p class="bento-desc">Tu presencia en internet orientada a captura de clientes.</p>
-          <div class="connect-badge" style="margin-top:20px;">
+          <div class="connect-badge">
             <span class="connect-dot"></span>
-            Enviando leads al Centro
+            Enviando leads al núcleo
           </div>
         </div>
 
         <!-- MODULE CENTRAL: DASHBOARD/CEREBRO -->
         <div class="bento-card bc-central reveal delay-1">
-          <span class="module-badge" style="background: rgba(255,255,255,0.1); color: #fff;">
-            Módulo Central
+          <span class="module-badge">
+            Núcleo Startia
           </span>
-          <div class="bento-icon" style="background: rgba(255,255,255,0.08);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+          <div class="bento-icon" style="background: rgba(217, 119, 6, 0.14);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round">
               <rect x="3" y="3" width="7" height="7" rx="1" />
               <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -3449,14 +3757,35 @@
             </svg>
           </div>
           <div class="bento-title">Dashboard Startia</div>
-          <p class="bento-desc">La mente de tu negocio. Todos los datos de turnos, leads y análisis convergen aquí en tiempo real de forma automática.</p>
+          <p class="bento-desc">El núcleo donde se ordenan los leads, turnos, contenido y señales que envían tus módulos.</p>
 
-          <div class="mini-ui" aria-hidden="true" style="margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-            <div class="mini-bar mid"></div>
-            <div class="mini-bar short"></div>
-            <div class="mini-row">
-              <div class="mini-pill" style="background: rgba(255,255,255,0.1);"></div>
-              <div class="mini-pill" style="background: rgba(255,255,255,0.1);"></div>
+          <div class="core-dashboard" aria-hidden="true">
+            <div class="core-dashboard-head">
+              <span>Actividad en vivo</span>
+              <span class="core-live"><span class="core-live-dot"></span>Datos llegando</span>
+            </div>
+            <div class="core-feed">
+              <div class="core-feed-row" style="color: #D97706;">
+                <span class="core-feed-dot landing"></span>
+                <span class="core-feed-bar" style="--flow: 76%;"></span>
+                <span class="core-feed-value">32 leads</span>
+              </div>
+              <div class="core-feed-row" style="color: #16a34a;">
+                <span class="core-feed-dot social"></span>
+                <span class="core-feed-bar" style="--flow: 58%;"></span>
+                <span class="core-feed-value">18 posts</span>
+              </div>
+              <div class="core-feed-row" style="color: #3b82f6;">
+                <span class="core-feed-dot turnos"></span>
+                <span class="core-feed-bar" style="--flow: 68%;"></span>
+                <span class="core-feed-value">24 turnos</span>
+              </div>
+            </div>
+            <div class="core-chart">
+              <span class="core-chart-bar" style="--bar: 42%;"></span>
+              <span class="core-chart-bar" style="--bar: 72%;"></span>
+              <span class="core-chart-bar" style="--bar: 55%;"></span>
+              <span class="core-chart-bar" style="--bar: 88%;"></span>
             </div>
           </div>
         </div>
@@ -3474,9 +3803,9 @@
           </div>
           <div class="bento-title">Redes Sociales</div>
           <p class="bento-desc">Generación automática de posts semanales para Instagram.</p>
-          <div class="connect-badge" style="margin-top:20px;">
+          <div class="connect-badge">
             <span class="connect-dot"></span>
-            Recibiendo del Centro
+            Enviando contenido al núcleo
           </div>
         </div>
 
@@ -3495,9 +3824,9 @@
           </div>
           <div class="bento-title">Agente Turnos</div>
           <p class="bento-desc">Agenda y confirmaciones desatendidas funcionando 24/7.</p>
-          <div class="connect-badge" style="margin-top:20px;">
+          <div class="connect-badge">
             <span class="connect-dot"></span>
-            Enviando eventos al Centro
+            Enviando eventos al núcleo
           </div>
         </div>
 
