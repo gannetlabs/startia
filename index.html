@@ -948,142 +948,413 @@
 
     /* ─── SOLUTION SECTION ─── */
     .solution-section {
-      padding: 112px 0;
+      padding: 116px 0 124px;
       position: relative;
       z-index: 1;
     }
 
     .solution-header {
-      max-width: 700px;
-      margin-bottom: 56px;
+      max-width: 900px;
+      margin: 0 auto 58px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
 
     .solution-h2 {
-      font-size: clamp(36px, 4.5vw, 58px);
+      font-size: clamp(38px, 5vw, 66px);
       font-weight: 900;
-      letter-spacing: -0.045em;
+      letter-spacing: 0;
       line-height: 1.05;
       margin-top: 14px;
-      margin-bottom: 18px;
       color: var(--black);
+      text-wrap: balance;
+    }
+
+    .solution-h2 .accent {
+      color: var(--amber);
     }
 
     .solution-sub {
       font-size: clamp(16px, 1.25vw, 18px);
       line-height: 1.65;
       color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto;
+      text-wrap: pretty;
     }
 
-    /* Bento grid: card featured spans 2 rows, 2 secondary stack on the right */
-    .solution-bento {
+    .solution-flow {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 20px;
+      grid-template-columns: minmax(0, 1fr) 112px minmax(0, 1.05fr);
+      align-items: stretch;
+      gap: 0;
+      position: relative;
     }
 
-    .sol-card {
-      background: var(--card);
-      border-radius: 28px;
-      padding: 36px;
+    .solution-panel {
+      min-height: 420px;
+      border-radius: 30px;
+      padding: clamp(28px, 3vw, 42px);
       border: 1px solid var(--border);
-      box-shadow: 0 4px 24px rgba(24, 22, 15, 0.05);
-      transition: box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
     }
 
-    .sol-card:hover {
-      box-shadow: 0 12px 48px rgba(24, 22, 15, 0.1);
-      transform: translateY(-3px);
+    .solution-before {
+      background: rgba(255, 255, 255, 0.56);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    .sol-card-featured {
-      grid-column: 1;
-      grid-row: 1 / 3;
+    .solution-after {
+      background: var(--card);
+      box-shadow: 0 28px 68px -46px rgba(24, 22, 15, 0.38), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
     }
 
-    .sol-card-secondary {
-      grid-column: 2;
-    }
-
-    .sol-icon-wrap {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      display: flex;
+    .solution-panel-kicker {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .sol-icon-wrap svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .sol-problem-tag {
+      gap: 8px;
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-      padding: 6px 10px;
-      background: rgba(24, 22, 15, 0.04);
-      border-radius: 6px;
-      display: inline-block;
-    }
-
-    .sol-title {
-      font-size: clamp(20px, 1.8vw, 26px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      color: var(--black);
-      margin-bottom: 14px;
-    }
-
-    .sol-desc {
-      font-size: clamp(14px, 1.1vw, 16px);
-      line-height: 1.65;
+      font-weight: 700;
+      letter-spacing: 0;
       color: var(--muted);
       margin-bottom: 24px;
     }
 
-    .sol-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .solution-kicker-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      opacity: 0.75;
     }
 
-    .sol-list li {
-      font-size: 15px;
-      font-weight: 600;
+    .solution-noise {
+      min-height: 340px;
+      position: relative;
+    }
+
+    .solution-chip {
+      --chip-rotate: 0deg;
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      background: rgba(253, 251, 247, 0.9);
+      border: 1px solid rgba(24, 22, 15, 0.08);
       color: var(--black);
+      font-size: clamp(13px, 1vw, 15px);
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 16px 36px -28px rgba(24, 22, 15, 0.36);
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+      transform: translate3d(0, 0, 0) rotate(var(--chip-rotate));
+      animation: noise-float-a 7.2s var(--ease-out) infinite;
+      will-change: transform;
+    }
+
+    .solution-chip::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(217, 119, 6, 0.28);
+      flex: 0 0 auto;
+    }
+
+    .solution-before:hover .solution-chip {
+      box-shadow: 0 20px 44px -30px rgba(24, 22, 15, 0.42);
+    }
+
+    .chip-1 {
+      top: 8%;
+      left: 3%;
+      --chip-rotate: -6deg;
+      animation-name: noise-float-a;
+    }
+
+    .chip-2 {
+      top: 2%;
+      right: 4%;
+      --chip-rotate: 5deg;
+      animation: noise-float-b 8.4s var(--ease-out) infinite 0.4s;
+    }
+
+    .chip-3 {
+      top: 30%;
+      left: 12%;
+      --chip-rotate: 7deg;
+      animation: noise-float-c 7.8s var(--ease-out) infinite 0.9s;
+    }
+
+    .chip-4 {
+      top: 27%;
+      right: 7%;
+      --chip-rotate: -5deg;
+      animation: noise-float-a 8.1s var(--ease-out) infinite 0.2s;
+    }
+
+    .chip-5 {
+      bottom: 29%;
+      left: 4%;
+      --chip-rotate: 4deg;
+      animation: noise-float-b 7.5s var(--ease-out) infinite 0.7s;
+    }
+
+    .chip-6 {
+      right: 4%;
+      bottom: 22%;
+      --chip-rotate: -7deg;
+      animation: noise-float-c 8.8s var(--ease-out) infinite 1s;
+    }
+
+    .chip-7 {
+      top: 52%;
+      left: 15%;
+      --chip-rotate: -3deg;
+      animation: noise-float-b 9s var(--ease-out) infinite 0.15s;
+    }
+
+    .chip-8 {
+      top: 58%;
+      right: 12%;
+      --chip-rotate: 6deg;
+      animation: noise-float-a 7.9s var(--ease-out) infinite 0.65s;
+    }
+
+    .chip-9 {
+      left: 8%;
+      bottom: 5%;
+      --chip-rotate: 5deg;
+      animation: noise-float-c 8.2s var(--ease-out) infinite 0.35s;
+    }
+
+    .chip-10 {
+      right: 2%;
+      bottom: 3%;
+      --chip-rotate: -4deg;
+      animation: noise-float-b 7.7s var(--ease-out) infinite 0.95s;
+    }
+
+    @keyframes noise-float-a {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(var(--chip-rotate));
+      }
+
+      50% {
+        transform: translate3d(6px, -5px, 0) rotate(var(--chip-rotate));
+      }
+    }
+
+    @keyframes noise-float-b {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(var(--chip-rotate));
+      }
+
+      50% {
+        transform: translate3d(-5px, 7px, 0) rotate(var(--chip-rotate));
+      }
+    }
+
+    @keyframes noise-float-c {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(var(--chip-rotate));
+      }
+
+      50% {
+        transform: translate3d(4px, 6px, 0) rotate(var(--chip-rotate));
+      }
+    }
+
+    .solution-connector {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
     }
 
-    .sol-check {
-      color: #16a34a;
+    .solution-connector svg {
+      width: 116px;
+      height: 54px;
+      overflow: visible;
+    }
+
+    .solution-connector path {
+      stroke: var(--amber);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 5;
+      fill: none;
+      opacity: 0.45;
+      animation: dash-move 3s linear infinite;
+    }
+
+    .solution-piece {
+      width: min(100%, 360px);
+      min-height: 216px;
+      margin: 8px auto 30px;
+      padding: 34px 32px 30px;
+      border-radius: 30px;
+      background: #FFFDF8;
+      border: 1px solid rgba(217, 119, 6, 0.16);
+      box-shadow: 0 24px 54px -38px rgba(217, 119, 6, 0.58), 0 1px 0 rgba(255, 255, 255, 0.92) inset;
+      position: relative;
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .solution-piece::before,
+    .solution-piece::after {
+      content: '';
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .solution-piece::before {
+      top: 50%;
+      left: -24px;
+      transform: translateY(-50%);
+      background: var(--cream);
+      border: 1px solid rgba(24, 22, 15, 0.07);
+      box-shadow: inset 0 8px 18px rgba(24, 22, 15, 0.05);
+      z-index: 1;
+    }
+
+    .solution-piece::after {
+      right: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #FFFDF8;
+      border: 1px solid rgba(217, 119, 6, 0.16);
+      box-shadow: 10px 0 24px -22px rgba(24, 22, 15, 0.32), 0 1px 0 rgba(255, 255, 255, 0.92) inset;
+      z-index: 0;
+    }
+
+    .solution-piece-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--amber-soft);
+      color: var(--amber);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .solution-piece-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .solution-piece-title {
+      font-size: clamp(22px, 2vw, 30px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .solution-piece-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      position: relative;
+      z-index: 2;
+    }
+
+    .solution-steps {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .solution-step {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--black);
+    }
+
+    .solution-step-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(217, 119, 6, 0.1);
+      color: var(--amber);
+    }
+
+    .solution-step-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .solution-close {
+      margin-top: 34px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(217, 119, 6, 0.08);
+      color: #7C3F00;
+      font-size: clamp(15px, 1.2vw, 17px);
       font-weight: 800;
-      font-size: 14px;
+      line-height: 1.35;
+      text-align: center;
     }
 
-    @media (max-width: 860px) {
-      .solution-bento {
+    @media (max-width: 980px) {
+      .solution-header {
+        gap: 22px;
+        margin-bottom: 42px;
+      }
+
+      .solution-flow {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
+        gap: 24px;
       }
 
-      .sol-card-featured {
-        grid-column: 1;
-        grid-row: auto;
+      .solution-panel {
+        min-height: auto;
       }
 
-      .sol-card-secondary {
-        grid-column: 1;
+      .solution-noise {
+        min-height: 360px;
+      }
+
+      .solution-connector {
+        min-height: 78px;
+      }
+
+      .solution-connector svg {
+        width: 54px;
+        height: 86px;
+        transform: rotate(90deg);
       }
     }
 
@@ -1092,9 +1363,95 @@
         padding: 72px 0;
       }
 
-      .sol-card {
+      .solution-panel {
         padding: 28px 24px;
         border-radius: 22px;
+      }
+
+      .solution-noise {
+        min-height: 460px;
+      }
+
+      .solution-chip {
+        font-size: 12px;
+        padding: 10px 11px;
+        max-width: 174px;
+      }
+
+      .chip-1 {
+        top: 1%;
+        left: 0;
+      }
+
+      .chip-2 {
+        top: 11%;
+        right: 0;
+      }
+
+      .chip-3 {
+        top: 23%;
+        left: 0;
+      }
+
+      .chip-4 {
+        top: 34%;
+        right: 0;
+      }
+
+      .chip-5 {
+        top: 46%;
+        left: 0;
+      }
+
+      .chip-6 {
+        top: 57%;
+        right: 0;
+      }
+
+      .chip-7 {
+        top: 69%;
+        left: 0;
+      }
+
+      .chip-8 {
+        top: 78%;
+        right: 0;
+      }
+
+      .chip-9 {
+        bottom: 4%;
+        left: 0;
+      }
+
+      .chip-10 {
+        right: 0;
+        bottom: 0;
+      }
+
+      .solution-piece {
+        min-height: 200px;
+        padding: 30px 28px 28px;
+        border-radius: 24px;
+      }
+
+      .solution-piece::before,
+      .solution-piece::after {
+        width: 38px;
+        height: 38px;
+      }
+
+      .solution-piece::before {
+        left: -20px;
+      }
+
+      .solution-piece::after {
+        right: -20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .solution-chip {
+        animation: none;
       }
     }
 
@@ -1504,9 +1861,8 @@
     /* ─── MODULES BENTO ─── */
     .bento {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto auto;
-      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
       margin-top: 72px;
     }
 
@@ -1526,32 +1882,86 @@
       border-color: rgba(217, 119, 6, 0.18);
     }
 
-    .bc-1 {
-      grid-column: span 5;
+    .bc-sat-1 {
+      grid-column: 1;
     }
 
-    .bc-2 {
-      grid-column: span 7;
+    .bc-central {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      background: var(--black);
+      color: var(--card);
+      border: 1px solid rgba(253, 251, 247, 0.15);
+      box-shadow: 0 32px 80px -20px rgba(24, 22, 15, 0.4);
+      display: flex;
+      flex-direction: column;
     }
 
-    .bc-3 {
-      grid-column: span 7;
+    .bc-central .bento-title {
+      color: #fff;
     }
 
-    .bc-4 {
-      grid-column: span 5;
+    .bc-central .bento-desc {
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    @media (max-width: 900px) {
+    .bc-central .module-badge {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+    }
+
+    .bc-sat-2 {
+      grid-column: 3;
+    }
+
+    .bc-sat-3 {
+      grid-column: 1;
+    }
+
+    .bc-sat-ghost {
+      grid-column: 3;
+      background: transparent;
+      border: 1px dashed var(--border);
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    .bc-sat-ghost:hover {
+      background: var(--card);
+      border-color: rgba(217, 119, 6, 0.2);
+      opacity: 1;
+      transform: none;
+    }
+
+    .bc-sat-ghost .bento-title {
+      margin-top: 16px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 1024px) {
+      .bento {
+        grid-template-columns: 1fr 1fr;
+      }
+      .bc-central {
+        grid-column: 1 / 3;
+        grid-row: auto;
+      }
+      .bc-sat-1, .bc-sat-2, .bc-sat-3, .bc-sat-ghost {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 640px) {
       .bento {
         grid-template-columns: 1fr;
       }
-
-      .bc-1,
-      .bc-2,
-      .bc-3,
-      .bc-4 {
-        grid-column: span 1;
+      .bc-central, .bc-sat-1, .bc-sat-2, .bc-sat-3, .bc-sat-ghost {
+        grid-column: 1;
       }
     }
 
@@ -2539,65 +2949,115 @@
     <div class="container">
 
       <div class="solution-header">
-        <span class="section-tag reveal">La solución</span>
-        <h2 class="solution-h2 reveal delay-1" id="solution-heading">
-          Startia hace el trabajo<br>que te consume el tiempo.
-        </h2>
+        <div>
+          <span class="section-tag reveal">La solución</span>
+          <h2 class="solution-h2 reveal delay-1" id="solution-heading">
+            No necesitás saber de IA. Necesitás saber cuál es tu <span class="accent">próxima pieza.</span>
+          </h2>
+        </div>
         <p class="solution-sub reveal delay-2">
-          Cada problema tiene su pieza. No comprás un sistema enorme — elegís exactamente lo que necesitás hoy.
+          Startia ordena todo ese ruido y lo convierte en una implementación simple: elegimos una pieza útil para tu
+          negocio, la dejamos funcionando y después sumás más cuando tenga sentido.
         </p>
       </div>
 
-      <div class="solution-bento reveal delay-3">
-
-        <!-- Card grande: automatización -->
-        <div class="sol-card sol-card-featured">
-          <div class="sol-icon-wrap" style="background: #FEF3DC;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-            </svg>
+      <div class="solution-flow reveal delay-3">
+        <div class="solution-panel solution-before">
+          <div class="solution-panel-kicker">
+            <span class="solution-kicker-dot" aria-hidden="true"></span>
+            El ruido
           </div>
-          <div class="sol-problem-tag">Antes: horas perdidas en tareas repetitivas</div>
-          <h3 class="sol-title">Las tareas de siempre, en automático.</h3>
-          <p class="sol-desc">
-            Confirmaciones de turno, respuestas frecuentes, recordatorios, publicaciones — Startia las hace sola mientras vos atendés a tus clientes o simplemente descansás.
-          </p>
-          <ul class="sol-list">
-            <li><span class="sol-check">✓</span> Recordatorios automáticos por WhatsApp</li>
-            <li><span class="sol-check">✓</span> Respuestas instantáneas las 24 hs</li>
-            <li><span class="sol-check">✓</span> Contenido listo para publicar</li>
+          <div class="solution-noise" aria-label="Obstáculos comunes al intentar implementar IA">
+            <span class="solution-chip chip-1">Apps sueltas</span>
+            <span class="solution-chip chip-2">Tutoriales eternos</span>
+            <span class="solution-chip chip-3">Prompts que no sabés usar</span>
+            <span class="solution-chip chip-4">Mensajes sin responder</span>
+            <span class="solution-chip chip-5">Turnos desordenados</span>
+            <span class="solution-chip chip-6">Contenido improvisado</span>
+            <span class="solution-chip chip-7">Demasiadas opiniones</span>
+            <span class="solution-chip chip-8">Herramientas caras</span>
+            <span class="solution-chip chip-9">No sé por dónde empezar</span>
+            <span class="solution-chip chip-10">Todo parece urgente</span>
+          </div>
+        </div>
+
+        <div class="solution-connector" aria-hidden="true">
+          <svg viewBox="0 0 116 54" fill="none" preserveAspectRatio="none">
+            <path d="M4 27C28 27 31 7 55 7C81 7 82 47 112 47" />
+          </svg>
+        </div>
+
+        <div class="solution-panel solution-after">
+          <div class="solution-panel-kicker">
+            <span class="solution-kicker-dot" aria-hidden="true"></span>
+            Con Startia
+          </div>
+
+          <div class="solution-piece">
+            <div class="solution-piece-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 3v3" />
+                <path d="M12 18v3" />
+                <path d="M4.22 4.22l2.12 2.12" />
+                <path d="M17.66 17.66l2.12 2.12" />
+                <path d="M3 12h3" />
+                <path d="M18 12h3" />
+                <path d="M4.22 19.78l2.12-2.12" />
+                <path d="M17.66 6.34l2.12-2.12" />
+                <circle cx="12" cy="12" r="3.5" />
+              </svg>
+            </div>
+            <h3 class="solution-piece-title">Tu primera pieza clara</h3>
+            <p class="solution-piece-text">
+              Una solución concreta para lo que más te frena hoy, lista para conectarse con el resto cuando crezcas.
+            </p>
+          </div>
+
+          <ul class="solution-steps" role="list">
+            <li class="solution-step">
+              <span class="solution-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.2 4.2L19 7" />
+                </svg>
+              </span>
+              Primera pieza recomendada
+            </li>
+            <li class="solution-step">
+              <span class="solution-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.2 4.2L19 7" />
+                </svg>
+              </span>
+              Configuración guiada
+            </li>
+            <li class="solution-step">
+              <span class="solution-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.2 4.2L19 7" />
+                </svg>
+              </span>
+              Módulo listo para usar
+            </li>
+            <li class="solution-step">
+              <span class="solution-step-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.2 4.2L19 7" />
+                </svg>
+              </span>
+              Más piezas cuando las necesites
+            </li>
           </ul>
         </div>
-
-        <!-- Card: clientes perdidos -->
-        <div class="sol-card sol-card-secondary">
-          <div class="sol-icon-wrap" style="background: #EFF6FF;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-          </div>
-          <div class="sol-problem-tag">Antes: clientes que se perdían sin respuesta</div>
-          <h3 class="sol-title">Tu negocio responde aunque vos no estés.</h3>
-          <p class="sol-desc">
-            El Agente IA atiende consultas, agenda turnos y cierra ventas las 24 hs — sin que tengas que estar pendiente del celular.
-          </p>
-        </div>
-
-        <!-- Card: herramientas complicadas -->
-        <div class="sol-card sol-card-secondary">
-          <div class="sol-icon-wrap" style="background: #F0FDF4;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12.5l4.2 4.2L19 7"/>
-            </svg>
-          </div>
-          <div class="sol-problem-tag">Antes: herramientas que complicaban todo</div>
-          <h3 class="sol-title">Lista en minutos. Sin cursos ni técnicos.</h3>
-          <p class="sol-desc">
-            Te guiamos paso a paso desde el primer clic. Empezás con una sola pieza y agregás más solo cuando tu negocio lo pide.
-          </p>
-        </div>
-
       </div>
+
+      <p class="solution-close reveal delay-4">
+        Empezás por una solución concreta, no por otro curso de IA.
+      </p>
     </div>
   </section>
 
@@ -2671,21 +3131,21 @@
   <section class="section" id="modulos" style="padding-top: 0;" aria-labelledby="modules-heading">
     <div class="container">
       <div class="reveal">
-        <span class="section-tag">Los módulos</span>
+        <span class="section-tag">El Ecosistema</span>
       </div>
       <h2 class="section-h2 reveal delay-1" id="modules-heading">
-        Cuatro piezas.<br>Un negocio completo.
+        Tu negocio crece.<br>Tu ecosistema también.
       </h2>
       <p class="section-sub reveal delay-2">
-        Cada módulo hace un trabajo concreto. Juntos, forman un ecosistema que trabaja solo.
+        Cada módulo resuelve un problema en concreto. Juntos, alimentan a un Cerebro Central donde controlás todo sin fricciones. Agregá los que necesites, cuando los necesites.
       </p>
 
       <div class="bento">
 
-        <!-- MODULE 1: LANDING PAGE -->
-        <div class="bento-card bc-1 reveal">
+        <!-- MODULE SAT 1: LANDING PAGE -->
+        <div class="bento-card bc-sat-1 reveal">
           <span class="module-badge" style="background: #FEF3DC; color: #92400e;">
-            Módulo 01
+            Módulo Web
           </span>
           <div class="bento-icon" style="background: #FEF3DC;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"
@@ -2695,23 +3155,44 @@
             </svg>
           </div>
           <div class="bento-title">Landing Page</div>
-          <p class="bento-desc">Tu presencia en internet, lista en minutos. Sin diseñadores. Sin código. Solo contás
-            quién sos y nosotros lo armamos.</p>
-          <span class="bento-tag">Desde $0 / mes</span>
-          <div class="mini-ui" aria-hidden="true">
-            <div class="mini-bar amber"></div>
+          <p class="bento-desc">Tu presencia en internet orientada a captura de clientes.</p>
+          <div class="connect-badge" style="margin-top:20px;">
+            <span class="connect-dot"></span>
+            Enviando leads al Centro
+          </div>
+        </div>
+
+        <!-- MODULE CENTRAL: DASHBOARD/CEREBRO -->
+        <div class="bento-card bc-central reveal delay-1">
+          <span class="module-badge" style="background: rgba(255,255,255,0.1); color: #fff;">
+            Módulo Central
+          </span>
+          <div class="bento-icon" style="background: rgba(255,255,255,0.08);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+            </svg>
+          </div>
+          <div class="bento-title">Dashboard Startia</div>
+          <p class="bento-desc">La mente de tu negocio. Todos los datos de turnos, leads y análisis convergen aquí en tiempo real de forma automática.</p>
+
+          <div class="mini-ui" aria-hidden="true" style="margin-top: auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
+            <div class="mini-bar mid"></div>
             <div class="mini-bar short"></div>
             <div class="mini-row">
-              <div class="mini-pill amber"></div>
-              <div class="mini-pill"></div>
+              <div class="mini-pill" style="background: rgba(255,255,255,0.1);"></div>
+              <div class="mini-pill" style="background: rgba(255,255,255,0.1);"></div>
             </div>
           </div>
         </div>
 
-        <!-- MODULE 2: CONTENT -->
-        <div class="bento-card bc-2 reveal delay-1">
+        <!-- MODULE SAT 2: CONTENT -->
+        <div class="bento-card bc-sat-2 reveal delay-2">
           <span class="module-badge" style="background: #F0FDF4; color: #166534;">
-            Módulo 02
+            Módulo Social
           </span>
           <div class="bento-icon" style="background: #F0FDF4;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"
@@ -2719,30 +3200,18 @@
               <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
             </svg>
           </div>
-          <div class="bento-title">Generador de Contenido</div>
-          <p class="bento-desc">Describís tu negocio una sola vez y la IA genera tus posts para Instagram, Facebook y
-            WhatsApp. Cada semana, automático.</p>
-          <div class="connect-badge">
+          <div class="bento-title">Redes Sociales</div>
+          <p class="bento-desc">Generación automática de posts semanales para Instagram.</p>
+          <div class="connect-badge" style="margin-top:20px;">
             <span class="connect-dot"></span>
-            Se conecta con Landing Page
-          </div>
-          <div class="mini-ui" aria-hidden="true">
-            <div class="mini-card-row">
-              <div class="mini-card active"></div>
-              <div class="mini-card"></div>
-              <div class="mini-card"></div>
-            </div>
-            <div style="margin-top: 12px;">
-              <div class="mini-bar mid"></div>
-              <div class="mini-bar short" style="margin-top: 6px;"></div>
-            </div>
+            Recibiendo del Centro
           </div>
         </div>
 
-        <!-- MODULE 3: APPOINTMENTS -->
-        <div class="bento-card bc-3 reveal delay-2">
+        <!-- MODULE SAT 3: APPOINTMENTS -->
+        <div class="bento-card bc-sat-3 reveal delay-3">
           <span class="module-badge" style="background: #EFF6FF; color: #1e40af;">
-            Módulo 03
+            Módulo Productividad
           </span>
           <div class="bento-icon" style="background: #EFF6FF;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"
@@ -2752,57 +3221,22 @@
               <circle cx="12" cy="16" r="1.5" fill="#3b82f6" />
             </svg>
           </div>
-          <div class="bento-title">Agente de Turnos</div>
-          <p class="bento-desc">Un asistente que atiende consultas y agenda citas por vos, las 24 horas. Tus clientes
-            reservan mientras dormís.</p>
-          <div class="connect-badge"
-            style="background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); color: #1d4ed8;">
-            <span class="connect-dot" style="background: #3b82f6;"></span>
-            Se conecta con todo lo anterior
-          </div>
-          <div class="mini-ui" aria-hidden="true">
-            <div class="mini-table">
-              <div class="mini-table-row">
-                <div class="mini-dot"></div>
-                <div class="mini-line"></div>
-                <div class="mini-line short"></div>
-              </div>
-              <div class="mini-table-row">
-                <div class="mini-dot amber"></div>
-                <div class="mini-line"></div>
-                <div class="mini-line short"></div>
-              </div>
-              <div class="mini-table-row">
-                <div class="mini-dot"></div>
-                <div class="mini-line"></div>
-                <div class="mini-line short"></div>
-              </div>
-            </div>
+          <div class="bento-title">Agente Turnos</div>
+          <p class="bento-desc">Agenda y confirmaciones desatendidas funcionando 24/7.</p>
+          <div class="connect-badge" style="margin-top:20px;">
+            <span class="connect-dot"></span>
+            Enviando eventos al Centro
           </div>
         </div>
 
-        <!-- MODULE 4: DASHBOARD -->
-        <div class="bento-card bc-4 reveal delay-3">
-          <span class="module-badge" style="background: #FDF4FF; color: #6b21a8;">
-            Módulo 04
-          </span>
-          <div class="bento-icon" style="background: #FDF4FF;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7" rx="1" />
-              <rect x="14" y="3" width="7" height="7" rx="1" />
-              <rect x="14" y="14" width="7" height="7" rx="1" />
-              <rect x="3" y="14" width="7" height="7" rx="1" />
+        <!-- MODULE GHOST: FUTURE SCALABILITY -->
+        <div class="bento-card bc-sat-ghost reveal delay-4">
+          <div class="bento-icon" style="background: transparent; border: 1px dashed var(--muted); margin-bottom: 0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--muted); width: 24px; height: 24px;">
+              <path d="M12 5v14M5 12h14" />
             </svg>
           </div>
-          <div class="bento-title">Dashboard Central</div>
-          <p class="bento-desc">Todas tus métricas, clientes y resultados en un solo panel. Sabés qué funciona y qué
-            mejorar, sin ser un experto.</p>
-          <div class="connect-badge"
-            style="background: rgba(147,51,234,0.08); border-color: rgba(147,51,234,0.2); color: #7e22ce;">
-            <span class="connect-dot" style="background: #9333ea;"></span>
-            Unifica todo el ecosistema
-          </div>
+          <div class="bento-title" style="color: var(--muted);">Conecta un nuevo módulo</div>
         </div>
 
       </div>
