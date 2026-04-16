@@ -59,3 +59,32 @@ These rules apply whenever generating or modifying UI in this project:
 - Appointments Agent → blue `#3b82f6`
 - Recordatorios → blue `#3b82f6`
 - Dashboard → purple `#9333ea`
+
+## Page sections structure
+
+The landing page follows a narrative arc of **Problem → Solution → Proof → Modular offering → CTA**:
+
+1. **Hero** — Puzzle visual with 4 main modules + satellites. CTA buttons. Social proof avatars.
+2. **Proof bar** — 4 stat metrics (emprendedores, rating, setup time, no-code guarantee).
+3. **Overwhelm section** — `abrumada.png` image (left) + 3 pain points: task overload, lost clients, complex tools. Sets up the problem.
+4. **Solution section** — Bento grid (1 featured card + 2 secondary) addressing each pain point directly. Featured card: automation task list.
+5. **Persona section** — `nutri.png` image (center) + copy (left/right sides). Quote from customer + stats.
+6. **How it works** — 4-step journey with module colors.
+7. **Modules** — 4 full cards describing each module.
+8. **Testimonials** — 3 cards: 1 featured (dark), 2 standard.
+9. **Pricing** — CTA-focused hint section.
+10. **Final CTA** — Large footer call-to-action.
+
+## Key images
+
+- `abrumada.png` — Overwhelm section (image left)
+- `nutri.png` — Persona section (image center)
+- Module images use `picsum.photos/seed/` placeholders
+
+## Component patterns
+
+**Section headers:** tag (small caps gray) → h2 headline → optional subtext
+**Cards:** white bg, 28px border-radius, 1px border, subtle shadow, hover lift (+3px)
+**Icons:** 52px circles with tinted backgrounds + 24px inline SVG at 1.5 stroke-width
+**Lists:** flex column, gap 10–18px, no bullets, use colored checkmarks or dots
+**Bento layouts:** Use grid for asymmetric featured cards; responsive to single column on tablets
