@@ -1,4 +1,3 @@
-4
 <!DOCTYPE html>
 <html lang="es">
 
@@ -359,10 +358,6 @@
       .hero-inner {
         grid-template-columns: 1fr;
         gap: 48px;
-      }
-
-      .hero-visual {
-        order: -1;
       }
     }
 
@@ -1623,7 +1618,7 @@
       }
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       .persona-section {
         padding: 88px 0;
       }
@@ -2567,7 +2562,7 @@
 
     .pricing-inner {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
       gap: clamp(48px, 7vw, 96px);
       align-items: center;
     }
@@ -2677,6 +2672,7 @@
       overscroll-behavior: contain;
       position: relative;
       scrollbar-width: none;
+      touch-action: pan-y;
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
       mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
     }
@@ -2747,7 +2743,7 @@
     .contact-inner {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1.2fr);
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
       gap: clamp(44px, 7vw, 88px);
       align-items: start;
     }
@@ -2984,6 +2980,7 @@
         height: auto;
         overflow-x: auto;
         overflow-y: hidden;
+        touch-action: pan-x;
         -webkit-mask-image: none;
         mask-image: none;
         padding-bottom: 6px;
@@ -3212,6 +3209,177 @@
       font-size: 13px;
       color: var(--muted);
     }
+
+    /* ─── HAMBURGER BUTTON ─── */
+    .nav-hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .nav-hamburger:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    /* ─── MOBILE MENU OVERLAY ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+    }
+
+    .mobile-menu-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(24, 22, 15, 0.48);
+      opacity: 0;
+      transition: opacity 0.35s var(--ease-out);
+    }
+
+    .mobile-menu-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(88vw, 340px);
+      height: 100%;
+      background: var(--cream);
+      border-left: 1px solid var(--border);
+      box-shadow: -16px 0 40px rgba(24, 22, 15, 0.12);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.45s var(--ease-out);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .mobile-menu.is-open {
+      display: block;
+    }
+
+    .mobile-menu.is-open .mobile-menu-backdrop {
+      opacity: 1;
+    }
+
+    .mobile-menu.is-open .mobile-menu-panel {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .mobile-menu-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .mobile-menu-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      color: var(--black);
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .mobile-menu-close:hover {
+      background: rgba(24, 22, 15, 0.06);
+    }
+
+    .mobile-menu-close:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 12px 0;
+      flex: 1;
+    }
+
+    .mobile-nav-links li a {
+      display: block;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .mobile-nav-links li a:hover {
+      color: var(--amber);
+      background: rgba(217, 119, 6, 0.05);
+    }
+
+    .mobile-menu-cta-wrap {
+      padding: 16px 24px 32px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .mobile-menu-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--black);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+    }
+
+    .mobile-menu-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(24, 22, 15, 0.28);
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 980px) {
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -3232,9 +3400,57 @@
         <li><a href="#empezar">Precios</a></li>
       </ul>
       <a href="#formulario-startia" class="nav-cta">Empezar gratis</a>
+      <button
+        class="nav-hamburger"
+        id="nav-hamburger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </nav>
 
+  <!-- ═══════════════════════════════════════════
+       MOBILE MENU
+  ════════════════════════════════════════════ -->
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación"
+  >
+    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-head">
+        <a href="#" class="mobile-menu-logo">Startia</a>
+        <button
+          class="mobile-menu-close"
+          id="mobile-menu-close"
+          aria-label="Cerrar menú"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <ul class="mobile-nav-links" role="list">
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#solucion">Solución</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#modulos">Módulos</a></li>
+        <li><a href="#testimonios">Historias</a></li>
+        <li><a href="#empezar">Precios</a></li>
+      </ul>
+      <div class="mobile-menu-cta-wrap">
+        <a href="#formulario-startia" class="mobile-menu-cta">Empezar gratis</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════
        HERO
@@ -4513,6 +4729,99 @@
             });
         });
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var hamburger = document.getElementById('nav-hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var closeBtn = document.getElementById('mobile-menu-close');
+      var backdrop = document.getElementById('mobile-menu-backdrop');
+
+      if (!hamburger || !mobileMenu) return;
+
+      var ICON_OPEN = '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+      var ICON_CLOSE = '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+      function openMenu() {
+        mobileMenu.classList.add('is-open');
+        document.body.classList.add('menu-open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        hamburger.setAttribute('aria-label', 'Cerrar menú');
+        hamburger.innerHTML = ICON_CLOSE;
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeMenu() {
+        mobileMenu.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Abrir menú');
+        hamburger.innerHTML = ICON_OPEN;
+        hamburger.focus();
+      }
+
+      hamburger.addEventListener('click', function () {
+        mobileMenu.classList.contains('is-open') ? closeMenu() : openMenu();
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeMenu);
+      }
+
+      if (backdrop) {
+        backdrop.addEventListener('click', closeMenu);
+      }
+
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var viewport = document.querySelector('.pricing-carousel-viewport');
+      if (!viewport) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var paused = false;
+      var direction = 1;
+      var speed = 0.45;
+
+      function tick() {
+        if (!paused) {
+          var isMobile = window.innerWidth <= 860;
+          if (isMobile) {
+            viewport.scrollLeft += speed * direction;
+            var maxLeft = viewport.scrollWidth - viewport.clientWidth;
+            if (viewport.scrollLeft >= maxLeft - 1) direction = -1;
+            else if (viewport.scrollLeft <= 1) direction = 1;
+          } else {
+            viewport.scrollTop += speed * direction;
+            var maxTop = viewport.scrollHeight - viewport.clientHeight;
+            if (viewport.scrollTop >= maxTop - 1) direction = -1;
+            else if (viewport.scrollTop <= 1) direction = 1;
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      viewport.addEventListener('mouseenter', function () { paused = true; });
+      viewport.addEventListener('mouseleave', function () { paused = false; });
+      viewport.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+      viewport.addEventListener('touchend', function () {
+        setTimeout(function () { paused = false; }, 2500);
+      });
+
+      requestAnimationFrame(tick);
     })();
   </script>
 
