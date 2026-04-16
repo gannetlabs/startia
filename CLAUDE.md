@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Startia v2 is a standalone landing page for a modular AI tools ecosystem targeting non-technical entrepreneurs. The entire frontend lives in a single `index.html` file — no build tooling, no framework, no package.json. It uses Tailwind CSS via CDN and vanilla JavaScript.
+Startia v2 is a standalone landing page for a modular AI tools ecosystem targeting non-technical entrepreneurs. The entire frontend lives in a single `index.html` file — no build tooling, no framework, no package.json. It uses plain CSS and vanilla JavaScript inside `index.html`.
 
 ## Previewing the page
 
@@ -43,6 +43,8 @@ These rules apply whenever generating or modifying UI in this project:
 - **Cards:** Use elevation only when hierarchy requires it. Avoid 3-column equal card grids.
 - **Animations:** `cubic-bezier(0.32, 0.72, 0, 1)` for all transitions. Never `linear` or `ease-in-out`.
 - **Scroll reveals:** Use `IntersectionObserver`. Never `window.addEventListener('scroll')`.
+- **Scroll-linked effects:** Use GSAP ScrollTrigger only for complex desktop effects, and keep them disabled/static for reduced-motion users and small screens.
+- **Pricing carousel:** Do not tie pricing cards to page scroll. The module-price cards should move only when the user scrolls inside the carousel viewport.
 - **Images:** `picsum.photos/seed/{descriptive-seed}/width/height` for placeholders. No Unsplash.
 
 ## Brand context
@@ -62,18 +64,26 @@ These rules apply whenever generating or modifying UI in this project:
 
 ## Page sections structure
 
-The landing page follows a narrative arc of **Problem → Solution → Proof → Modular offering → CTA**:
+The landing page follows a narrative arc of **Problem → Solution → Process → Modules → Proof → Pricing → Trial → Form**:
 
 1. **Hero** — Puzzle visual with 4 main modules + satellites. CTA buttons. Social proof avatars.
 2. **Proof bar** — 4 stat metrics (emprendedores, rating, setup time, no-code guarantee).
-3. **Overwhelm section** — `abrumada.png` image (left) + 3 pain points: task overload, lost clients, complex tools. Sets up the problem.
-4. **Solution section** — Bento grid (1 featured card + 2 secondary) addressing each pain point directly. Featured card: automation task list.
-5. **Persona section** — `nutri.png` image (center) + copy (left/right sides). Quote from customer + stats.
-6. **How it works** — 4-step journey with module colors.
-7. **Modules** — 4 full cards describing each module.
-8. **Testimonials** — 3 cards: 1 featured (dark), 2 standard.
-9. **Pricing** — CTA-focused hint section.
-10. **Final CTA** — Large footer call-to-action.
+3. **Problem** — `#problema`, `abrumada.png` image (left) + 3 pain points: task overload, lost clients, complex tools.
+4. **Solution** — `#solucion`, before/after composition: noisy chips on the left, dotted connector, and a clear first-piece panel on the right.
+5. **How it works** — `#como-funciona`, puzzle-shaped 4-step journey. Step 3 docks with GSAP ScrollTrigger on desktop.
+6. **Modules** — `#modulos`, modular offering cards.
+7. **Testimonials** — `#testimonios`, 3 cards: 1 featured (dark), 2 standard.
+8. **Persona** — `#para-vos`, `nutri.png` image (center) + copy/quote/stats. Left copy column has desktop GSAP parallax.
+9. **Pricing** — `#empezar`, pricing copy plus a module-price carousel. The carousel scrolls only inside its own viewport.
+10. **Trial CTA** — Free-trial CTA: "Elegí tu módulo y obtené tu primer mes gratis." Button points to `#formulario-startia`.
+11. **Form** — `#formulario-startia`, final commercial section before the footer. Keep fields, helpers, errors, Netlify attributes, and inline success status intact.
+12. **Footer** — Includes primary section navigation plus secondary links.
+
+## Navigation
+
+- Header links should stay compact and point to real anchors: `#problema`, `#solucion`, `#como-funciona`, `#modulos`, `#testimonios`, `#empezar`.
+- Header CTA should point to `#formulario-startia`.
+- Footer should include the fuller menu: Problem, Solution, How it works, Modules, Stories, Pricing, Contact, plus secondary links.
 
 ## Key images
 
