@@ -39,6 +39,7 @@ These rules apply whenever generating or modifying UI in this project:
 - **Full-height sections:** Always `min-h-[100dvh]`, never `h-screen` (iOS Safari bug).
 - **Hero layout:** Split asymmetric (text left, visual right). Centered hero is banned.
 - **Hero puzzle visual:** Preserve the CSS puzzle-piece silhouettes and animated dotted SVG connector lines. The compact satellite pieces are `Agente IA` above `Landing Page`, `Ideas` to the right of `Contenido`, and `Recordatorios` below `Turnos`.
+- **Modules ecosystem visual:** `#modulos` uses a puzzle-piece ecosystem map. Active module cards should keep CSS tabs/sockets, dotted SVG connections to the `Dashboard Startia` nucleus, and dotted connections between active modules. The empty `+` module is future capacity only and should not connect to the nucleus.
 - **Hero alignment:** Keep `Agente IA`, `Landing Page`, `Turnos`, and `Recordatorios` left-aligned on the same vertical axis.
 - **Cards:** Use elevation only when hierarchy requires it. Avoid 3-column equal card grids.
 - **Animations:** `cubic-bezier(0.32, 0.72, 0, 1)` for all transitions. Never `linear` or `ease-in-out`.
@@ -71,7 +72,7 @@ The landing page follows a narrative arc of **Problem → Solution → Process �
 3. **Problem** — `#problema`, `abrumada.png` image (left) + 3 pain points: task overload, lost clients, complex tools.
 4. **Solution** — `#solucion`, before/after composition: noisy chips on the left, dotted connector, and a clear first-piece panel on the right.
 5. **How it works** — `#como-funciona`, puzzle-shaped 4-step journey. Step 3 docks with GSAP ScrollTrigger on desktop.
-6. **Modules** — `#modulos`, modular offering cards.
+6. **Modules** — `#modulos`, ecosystem map with puzzle-shaped module cards. `Dashboard Startia` is the slightly larger amber nucleus with incoming-data mini charts. More modules should imply more data and better decisions.
 7. **Testimonials** — `#testimonios`, 3 cards: 1 featured (dark), 2 standard.
 8. **Persona** — `#para-vos`, `nutri.png` image (center) + copy/quote/stats. Left copy column has desktop GSAP parallax.
 9. **Pricing** — `#empezar`, pricing copy plus a module-price carousel. The carousel scrolls only inside its own viewport.

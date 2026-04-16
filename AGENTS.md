@@ -33,6 +33,9 @@ If browser opening is unavailable, serve the current directory with any static f
 - The header and footer navigation should point to real section anchors. The header CTA should point to `#formulario-startia`.
 - `#solucion` uses a before/after composition: noisy chips on the left, a dotted connector, and a clear first-piece panel on the right.
 - `#como-funciona` uses puzzle-shaped step cards. The third step is animated with GSAP ScrollTrigger on desktop so it starts separated above the step row and docks into the second piece while scrolling.
+- `#modulos` uses an ecosystem map with puzzle-shaped module cards. `Dashboard Startia` is the slightly larger amber nucleus with incoming-data mini charts. Active modules connect to the nucleus and to each other through animated dotted SVG lines.
+- In `#modulos`, the empty `+` card represents future capacity only. It should keep the puzzle-piece silhouette but must not have a dotted line into the central nucleus or copy implying it is actively feeding data.
+- The `#modulos` section copy should communicate that more modules create more business data, which enables better decisions.
 - `#para-vos` has a GSAP ScrollTrigger parallax on the left text column on desktop.
 - `#empezar` is the pricing section. It includes a module-price carousel that scrolls only inside the card viewport, not with the page scroll.
 - The free-trial CTA appears after pricing and before the form. Its CTA should point to `#formulario-startia`.
